@@ -135,84 +135,9 @@ class PureEntities extends PluginBase implements Listener{
         }
     }
 
-    public function BlockPlaceEvent(BlockPlaceEvent $ev){
-        if($ev->isCancelled()){
-            return;
-        }
+    
+    
 
-        $block = $ev->getBlock();
-        if($block->getId() == Item::JACK_O_LANTERN || $block->getId() == Item::PUMPKIN){
-            if(
-                $block->getSide(Vector3::SIDE_DOWN)->getId() == Item::SNOW_BLOCK
-                && $block->getSide(Vector3::SIDE_DOWN, 2)->getId() == Item::SNOW_BLOCK
-            ){
-                for($y = 1; $y < 3; $y++){
-                    $block->getLevel()->setBlock($block->add(0, -$y, 0), new Air());
-                }
-                $entity = PureEntities::create("SnowGolem", Position::fromObject($block->add(0.5, -2, 0.5), $block->level));
-                if($entity != null){
-                    $entity->spawnToAll();
-                }
-                $ev->setCancelled();
-            }elseif(
-                $block->getSide(Vector3::SIDE_DOWN)->getId() == Item::IRON_BLOCK
-                && $block->getSide(Vector3::SIDE_DOWN, 2)->getId() == Item::IRON_BLOCK
-            ){
-                $first = $block->getSide(Vector3::SIDE_EAST);
-                $second = $block->getSide(Vector3::SIDE_EAST);
-                if(
-                    $first->getId() == Item::IRON_BLOCK
-                    && $second->getId() == Item::IRON_BLOCK
-                ){
-                    $block->getLevel()->setBlock($first, new Air());
-                    $block->getLevel()->setBlock($second, new Air());
-                }else{
-                    $first = $block->getSide(Vector3::SIDE_NORTH);
-                    $second = $block->getSide(Vector3::SIDE_SOUTH);
-                    if(
-                        $first->getId() == Item::IRON_BLOCK
-                        && $second->getId() == Item::IRON_BLOCK
-                    ){
-                        $block->getLevel()->setBlock($first, new Air());
-                        $block->getLevel()->setBlock($second, new Air());
-                    }else{
-                        return;
-                    }
-                }
-
-                if($second != null){
-                    $entity = PureEntities::create("IronGolem", Position::fromObject($block->add(0.5, -2, 0.5), $block->level));
-                    if($entity != null){
-                        $entity->spawnToAll();
-                    }
-
-                    $block->getLevel()->setBlock($entity, new Air());
-                    $block->getLevel()->setBlock($block->add(0, -1, 0), new Air());
-                    $ev->setCancelled();
-                }
-            }
-        }
-    }
-
-    public function BlockBreakEvent(BlockBreakEvent $ev){
-        if($ev->isCancelled()){
-            return;
-        }
-
-        $block = $ev->getBlock();
-        if(
-            (
-                $block->getId() == Block::STONE
-                or $block->getId() == Block::STONE_WALL
-                or $block->getId() == Block::STONE_BRICK
-                or $block->getId() == Block::STONE_BRICK_STAIRS
-            ) && ($block->level->getBlockLightAt((int) $block->x, (int) $block->y, (int) $block->z) < 12 and mt_rand(1, 5) < 2)
-        ){
-            $entity = PureEntities::create("Silverfish", $block);
-            if($entity != null){
-                $entity->spawnToAll();
-            }
-        }
-    }
+    
 
 }
