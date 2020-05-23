@@ -9,22 +9,8 @@ use magicode\pureentities\entity\animal\walking\Ocelot;
 use magicode\pureentities\entity\animal\walking\Pig;
 use magicode\pureentities\entity\animal\walking\Rabbit;
 use magicode\pureentities\entity\animal\walking\Sheep;
-use magicode\pureentities\entity\monster\flying\Blaze;
-use magicode\pureentities\entity\monster\flying\Ghast;
-use magicode\pureentities\entity\monster\walking\CaveSpider;
 use magicode\pureentities\entity\monster\walking\Creeper;
-use magicode\pureentities\entity\monster\walking\Enderman;
-use magicode\pureentities\entity\monster\walking\IronGolem;
-use magicode\pureentities\entity\monster\walking\PigZombie;
-use magicode\pureentities\entity\monster\walking\Silverfish;
-use magicode\pureentities\entity\monster\walking\Skeleton;
-use magicode\pureentities\entity\monster\walking\SnowGolem;
-use magicode\pureentities\entity\monster\walking\Spider;
 use magicode\pureentities\entity\monster\walking\Wolf;
-use magicode\pureentities\entity\monster\walking\Zombie;
-use magicode\pureentities\entity\monster\walking\ZombieVillager;
-use magicode\pureentities\entity\projectile\FireBall;
-use magicode\pureentities\tile\Spawner;
 use pocketmine\block\Air;
 use pocketmine\entity\Entity;
 use pocketmine\event\block\BlockBreakEvent;
@@ -50,30 +36,15 @@ class PureEntities extends PluginBase implements Listener{
 
     public function onLoad(){
         $classes = [
-            Blaze::class,
-            CaveSpider::class,
             Chicken::class,
             Cow::class,
             Creeper::class,
-            Enderman::class,
-            Ghast::class,
-            IronGolem::class,
-            //MagmaCube::class,
             Mooshroom::class,
             Ocelot::class,
             Pig::class,
-            PigZombie::class,
             Rabbit::class,
             Sheep::class,
-            Silverfish::class,
-            Skeleton::class,
-            //Slime::class,
-            SnowGolem::class,
-            Spider::class,
-            Wolf::class,
-            Zombie::class,
-            ZombieVillager::class,
-            FireBall::class
+            Wolf::class
         ];
         foreach($classes as $name){
             Entity::registerEntity($name);
